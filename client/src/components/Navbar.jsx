@@ -10,6 +10,7 @@ const Navbar = () => {
     const { openSignIn } = useClerk()
 
     return (
+
         <div className='fixed z-10 backdrop-blur-2xl flex
         items-center justify-between py-3 px-4 sm:px-20 xl:px-32 w-full'>
 
@@ -26,8 +27,7 @@ const Navbar = () => {
                         Get started <ArrowRight className='w-4 h-4' />
                     </button>)
             }
-
-        </div>
+        </div>   
     )
 }
 
