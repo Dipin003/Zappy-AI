@@ -14,6 +14,7 @@ const navItems = [
 ];
 
 const Sidebar = ({ sidebar, setSidebar }) => {
+
     const { user, isLoaded } = useUser();
     const { signOut, openUserProfile } = useClerk();
 
@@ -33,23 +34,24 @@ const Sidebar = ({ sidebar, setSidebar }) => {
                 <h1 className="mt-1 text-center font-semibold">{user.fullName}</h1>
 
                 <div className="mt-3 px-4 text-sm font-medium space-y-1">
-                    {navItems.map(({ to, label, Icon }) => (
-                        <NavLink
-                            key={to}
-                            to={to}
-                            end={to === '/ai'}
-                            onClick={() => setSidebar(false)}
-                            className={({ isActive }) =>
-                                `px-3.5 py-2.5 flex items-center gap-3 rounded transition-colors duration-200 ${isActive
-                                    ? 'bg-gradient-to-r from-[#67f63cd4] to-[#34ea3d] text-white'
-                                    : 'text-gray-600 hover:text-green-300'
-                                }`
-                            }
-                        >
-                            <Icon className="w-4 h-4" />
-                            <span>{label}</span>
-                        </NavLink>
-                    ))}
+                    {
+                        navItems.map(({ to, label, Icon }) => (
+                            <NavLink
+                                key={to}
+                                to={to}
+                                end={to === '/ai'}
+                                onClick={() => setSidebar(false)}
+                                className={({ isActive }) =>
+                                    `px-3.5 py-2.5 flex items-center gap-3 rounded transition-colors duration-200 ${isActive
+                                        ? 'bg-gradient-to-r from-[#67f63cd4] to-[#34ea3d] text-white'
+                                        : 'text-gray-600 hover:text-green-300'
+                                    }`
+                                }
+                            >
+                                <Icon className="w-4 h-4" />
+                                <span>{label}</span>
+                            </NavLink>
+                        ))}
                 </div>
             </div>
 
