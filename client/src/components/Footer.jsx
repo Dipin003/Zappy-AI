@@ -3,7 +3,6 @@ import { assets } from "../assets/assets";
 
 const footer = () => {
 
-    // chore: integrate prebuilt footer UI with minor customizations for Zappy.ai
 
     return (
         <footer className="px-6 md:px-16 lg:px-24 xl:px-32 pt-8 w-full text-gray-500 mt-20">
