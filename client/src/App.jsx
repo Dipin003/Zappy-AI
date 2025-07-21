@@ -17,7 +17,6 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
 
-        {/* feat(routes): setup protected AI routes under /ai with nested layout and feature pages */}
 
         <Route path='/ai' element={<Layout />}>
           <Route index element={<Dashboard />} />
