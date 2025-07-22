@@ -30,7 +30,7 @@ const CreationItem = ({ item }) => {
                         ) : (
                             <div className="mt-2 h-full overflow-y-scroll">
 
-                                <div className="">
+                                <div className="reset-tw">
                                     <Mardown>
                                         {item.content}
                                     </Mardown>
