@@ -2,9 +2,14 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import { clerkMiddleware, requireAuth } from '@clerk/express'
+import aiRouter from './routes/aiRoutes.js'
+import connectCloudinary from './configs/cloudinary.js'
 
 
 const app = express()
+
+// Connecting Cloudinary
+await connectCloudinary()
 
 app.use(cors())
 app.use(express.json())
@@ -16,6 +21,8 @@ app.get('/', (req, res) => {
 })
 
 app.use(requireAuth())
+
+app.use('/api/ai' , aiRouter)
 
 const PORT = process.env.PORT || 3000
 
