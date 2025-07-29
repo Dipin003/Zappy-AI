@@ -11,7 +11,7 @@ const Navbar = () => {
 
     return (
 
-        <div className='fixed z-10 backdrop-blur-2xl flex
+        <div className='fixed z-50 backdrop-blur-2xl flex
         items-center justify-between py-3 px-4 sm:px-20 xl:px-32 w-full'>
 
             <h2 className='text-4xl font-bold text-purple-500 cursor-pointer'
@@ -27,7 +27,7 @@ const Navbar = () => {
                         Get started <ArrowRight className='w-4 h-4' />
                     </button>)
             }
-        </div>   
+        </div>
     )
 }
 
