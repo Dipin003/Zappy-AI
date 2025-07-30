@@ -169,14 +169,15 @@ export const removeImageBackground = async (req, res) => {
   }
 }
 
+
 export const removeImageObject = async (req, res) => {
   try {
-    const { userId } = req.auth()
+    const { userId } = req.auth?.() || {}
     const { object } = req.body
     const file = req.file
-
     const plan = req.plan
 
+    // ✅ Validate required data
     if (!file) {
       return res.status(400).json({ success: false, message: "Image file is required" })
     }
@@ -189,21 +190,38 @@ export const removeImageObject = async (req, res) => {
       return res.status(403).json({ success: false, message: "This feature is only available for premium users" })
     }
 
-    const { public_id } = await cloudinary.uploader.upload(file.path)
+    // ✅ Upload image to Cloudinary
+    let uploadedImage
+    try {
+      uploadedImage = await cloudinary.uploader.upload(file.path, {
+        resource_type: "image",
+      })
+    } catch (err) {
+      console.error("Cloudinary Upload Error:", err)
+      return res.status(500).json({ success: false, message: "Image upload failed" })
+    }
 
-    const imageUrl = cloudinary.url(public_id, {
+    const public_id = uploadedImage.public_id
+
+    // ✅ Generate transformation URL
+    const transformedImageUrl = cloudinary.url(public_id, {
       transformation: [{
         effect: `gen_remove:${object}`
       }],
       resource_type: "image",
     })
 
-    await sql`INSERT INTO creations (user_id, prompt, content, type) VALUES (${userId}, ${`Removed ${object} from image`}, ${imageUrl}, 'image')`
+    // ✅ Save to DB
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type) 
+      VALUES (${userId}, ${`Removed ${object} from image`}, ${transformedImageUrl}, 'image')
+    `
 
-    res.json({ success: true, content: imageUrl })
+    // ✅ Respond with image
+    res.json({ success: true, content: transformedImageUrl })
 
   } catch (error) {
-    console.error(error.message)
+    console.error("Unexpected Error:", error.message)
     res.status(500).json({ success: false, message: error.message })
   }
 }
