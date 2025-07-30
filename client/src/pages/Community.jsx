@@ -1,6 +1,5 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
 import { useEffect, useState } from "react"
-import { dummyPublishedCreationData } from "../assets/assets"
 import { Heart } from "lucide-react"
 
 import axios from "axios"

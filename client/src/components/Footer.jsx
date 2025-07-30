@@ -1,52 +1,66 @@
 import { assets } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
 
+const Footer = () => {
+  const navigate = useNavigate();
 
-const footer = () => {
+  return (
+    <footer className="px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pt-12 w-full text-gray-500 mt-20 bg-gray-50">
+      {/* Top Section */}
+      <div className="flex flex-col md:flex-row justify-between w-full gap-12 border-b border-gray-300 pb-10">
+        {/* Logo & Description */}
+        <div className="max-w-full md:max-w-sm">
+          <h2
+            className="text-3xl md:text-4xl font-bold text-purple-600 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            Zappy.ai
+          </h2>
+          <p className="mt-5 text-sm md:text-base leading-relaxed">
+            Zappy.ai is a platform offering a wide range of AI tools to enhance your creativity. <br />
+            Unlock your potential with powerful tools built for creators, developers, and dreamers.
+          </p>
+        </div>
 
+        {/* Links and Newsletter Container */}
+        <div className="flex flex-col sm:flex-row md:flex-1 md:justify-between gap-10">
+          {/* Company Links */}
+          <div>
+            <h2 className="font-semibold mb-4 text-gray-800 text-base md:text-lg">Company</h2>
+            <ul className="text-sm space-y-2">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
 
-    return (
-        <footer className="px-6 md:px-16 lg:px-24 xl:px-32 pt-8 w-full text-gray-500 mt-20">
-            <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-500/30 pb-6">
-                <div className="md:max-w-96">
-
-                    <h2 className='text-4xl font-bold text-purple-500 cursor-pointer'
-                        onClick={() => navigate('/')}
-                    >Zappy.ai</h2>
-
-                    <p className="mt-6 text-sm">
-                        Zappy.ai is a platform that provides users with a wide range of AI tools to help them create content. <br />
-                        Unlock your creative potential with Zappy.ai — an all-in-one platform packed with AI tools to elevate your content
-                    </p>
-                </div>
-                <div className="flex-1 flex items-start md:justify-end gap-20">
-                    <div>
-                        <h2 className="font-semibold mb-5 text-gray-800">Company</h2>
-                        <ul className="text-sm space-y-2">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h2 className="font-semibold text-gray-800 mb-5">Subscribe to our newsletter</h2>
-                        <div className="text-sm space-y-2">
-                            <p>The latest news, articles, and resources, sent to your inbox weekly.</p>
-                            <div className="flex items-center gap-2 pt-4">
-
-                                <input className="border border-gray-500/30 placeholder-gray-500 focus:ring-2 ring-indigo-600 outline-none w-full max-w-64 h-9 rounded px-2" type="email" placeholder="Enter your email" />
-
-                                <button className="bg-primary cursor-pointer w-24 h-9 text-white rounded">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p className="pt-4 text-center text-xs md:text-sm pb-5">
-                Copyright 2025 © <a href="/">ZappyAI </a>. All Right Reserved.
+          {/* Newsletter */}
+          <div className="w-full sm:max-w-sm">
+            <h2 className="font-semibold text-gray-800 mb-4 text-base md:text-lg">Subscribe to our newsletter</h2>
+            <p className="text-sm md:text-base">
+              Get weekly updates on tools, articles, and exclusive offers.
             </p>
-        </footer>
-    );
+            <div className="flex flex-col md:flex-row items-stretch gap-3 pt-4">
+              <input
+                className="border border-gray-400/40 placeholder-gray-500 focus:ring-2 ring-indigo-500 outline-none w-full md:max-w-[220px] h-10 rounded px-3 text-sm"
+                type="email"
+                placeholder="Enter your email"
+              />
+              <button className="bg-purple-600 hover:bg-purple-700 transition-all duration-200 cursor-pointer h-10 px-5 text-white rounded text-sm whitespace-nowrap">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Section */}
+      <p className="pt-6 text-center text-xs sm:text-sm pb-6 text-gray-600">
+        © 2025 <a href="/" className="text-purple-500 font-medium">ZappyAI</a>. All Rights Reserved.
+      </p>
+    </footer>
+  );
 };
 
-export default footer
+export default Footer;
