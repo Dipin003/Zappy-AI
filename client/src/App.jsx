@@ -12,7 +12,6 @@ import Community from './pages/Community'
 import { Toaster } from 'react-hot-toast'
 
 
-
 const App = () => {
 
   return (

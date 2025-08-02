@@ -1,4 +1,3 @@
-import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -29,7 +28,7 @@ const Footer = () => {
             <h2 className="font-semibold mb-4 text-gray-800 text-base md:text-lg">Company</h2>
             <ul className="text-sm space-y-2">
               <li><a href="#">Home</a></li>
-              <li><a href="#">About Us</a></li>
+              <li><a href="#">About us</a></li>
               <li><a href="#">Contact Us</a></li>
               <li><a href="#">Privacy Policy</a></li>
             </ul>
