@@ -6,11 +6,68 @@ import { v2 as cloudinary } from 'cloudinary'
 import fs from 'fs'
 import pdf from 'pdf-parse/lib/pdf-parse.js'
 import FormData from 'form-data'
+import path from 'path';
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
 });
+
+
+export const removeImageBackground = async (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ success: false, message: 'No file uploaded' });
+    }
+
+    // Prepare Remove.bg form data
+    const formData = new FormData();
+    formData.append('image_file', fs.createReadStream(file.path));
+    formData.append('size', 'auto');
+
+    // Call Remove.bg API
+    const response = await axios.post('https://api.remove.bg/v1.0/removebg', formData, {
+      responseType: 'arraybuffer',
+      headers: {
+        ...formData.getHeaders(),
+        'X-Api-Key': process.env.REMOVE_BG_API_KEY,
+      },
+      timeout: 60000, // optional: increase timeout to 60s
+    });
+
+    // Convert ArrayBuffer to Buffer for Cloudinary upload
+    const buffer = Buffer.from(response.data, 'binary');
+
+    // Promisify Cloudinary upload_stream
+    const uploadFromBuffer = (buffer) => {
+      return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { folder: 'background-removed' },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
+        stream.end(buffer);
+      });
+    };
+
+    // Upload to Cloudinary
+    const cloudinaryResult = await uploadFromBuffer(buffer);
+
+    res.status(200).json({
+      success: true,
+      message: 'Background removed and uploaded to Cloudinary successfully',
+      url: cloudinaryResult.secure_url,
+    });
+  } catch (error) {
+    console.error('Remove.bg or Cloudinary Error:', error);
+    res.status(500).json({ success: false, message: 'Failed to remove background or upload image' });
+  }
+};
+
+
 
 export const generateArticle = async (req, res) => {
   try {
@@ -137,37 +194,8 @@ export const generateImage = async (req, res) => {
   }
 }
 
-export const removeImageBackground = async (req, res) => {
-  try {
-    const { userId } = req.auth()
-    const file = req.file
 
-    const plan = req.plan
 
-    if (!file) {
-      return res.status(400).json({ success: false, message: "Image file is required" })
-    }
-
-    if (plan !== 'premium') {
-      return res.status(403).json({ success: false, message: "This feature is only available for premium users" })
-    }
-
-    // Cloudinary remove background transformation
-    const { secure_url } = await cloudinary.uploader.upload(file.path, {
-      transformation: [
-        { effect: "remove_background" }
-      ]
-    })
-
-    await sql`INSERT INTO creations (user_id, prompt, content, type) VALUES (${userId}, 'Remove background from image', ${secure_url}, 'image')`
-
-    res.json({ success: true, content: secure_url })
-
-  } catch (error) {
-    console.error(error.message)
-    res.status(500).json({ success: false, message: error.message })
-  }
-}
 
 
 export const removeImageObject = async (req, res) => {
