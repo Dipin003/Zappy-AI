@@ -1,7 +1,6 @@
 import { Eraser, Scissors, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 
-
 import { useAuth } from '@clerk/clerk-react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
