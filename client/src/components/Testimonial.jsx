@@ -1,3 +1,7 @@
+
+import { motion } from "framer-motion"
+
+
 const Testimonial = () => {
     const cardsData = [
         {
@@ -75,14 +79,22 @@ const Testimonial = () => {
             }
         `}</style>
 
-            <div className="text-center px-3">
+
+            <motion.div
+                className="text-center px-3 mb-3 py-5"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.4 }}
+                transition={{ duration: 1 }}
+
+            >
                 <h1 className="text-3xl inline-block sm:text-5xl font-semibold text-gray-700 mb-4">
                     Trusted by Creators Worldwide
                 </h1>
                 <p className="text-gray-500 text-xs sm:text-sm px-5">
                     See why creators everywhere choose our tools to bring their ideas to life.
                 </p>
-            </div>
+            </motion.div>
 
             <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
                 <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
