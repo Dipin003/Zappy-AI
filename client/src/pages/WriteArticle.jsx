@@ -27,7 +27,7 @@ const WriteArticle = () => {
     }
   ]
 
-  const [selectedLength, setSelectedLength] = useState(articleLength[0].length)
+  const [selectedLength, setSelectedLength] = useState(articleLength[0])
   const [input, setInput] = useState('')
 
   const [loading, setLoading] = useState(false)
@@ -40,7 +40,7 @@ const WriteArticle = () => {
 
     try {
       setLoading(true)
-      const prompt = `Write an article about ${input} in ${selectedLength} words.`
+      const prompt = `Write an article about ${input} in ${selectedLength.length} words.`
 
       const { data } = await axios.post('api/ai/generate-article', {
         prompt, length: selectedLength.length

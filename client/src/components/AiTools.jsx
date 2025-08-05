@@ -26,7 +26,7 @@ const AiTools = () => {
 
   return (
     <div
-      className="px-4 sm:px-20 xl:px-32  py-16 rounded-3xl"
+      className="px-4 sm:px-20 xl:px-32 py-16 rounded-3xl"
       style={{
         background: 'linear-gradient(to right, #f0f4ff, #fdfcff)',
       }}

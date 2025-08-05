@@ -81,7 +81,7 @@ const Testimonial = () => {
 
 
             <motion.div
-                className="text-center px-3 mb-3 py-5"
+                className="text-center px-3 py-16 mb-1"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.4 }}

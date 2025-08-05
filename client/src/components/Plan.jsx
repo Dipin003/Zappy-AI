@@ -7,7 +7,7 @@ const Plan = () => {
 
     return (
 
-        <div className='max-w-2xl mx-auto z-20 my-30'>
+        <div className='max-w-2xl mx-auto z-20 py-16'>
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
