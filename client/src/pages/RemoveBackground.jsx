@@ -74,6 +74,7 @@ const RemoveBackground = () => {
 
         <button
           disabled={loading}
+          
           className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#3ac7fb] to-[#f54064cb] text-white px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer"
         >
           {loading ? (

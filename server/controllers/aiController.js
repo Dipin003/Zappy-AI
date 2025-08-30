@@ -23,7 +23,7 @@ export const removeImageObject = async (req, res) => {
     const file = req.file
     const plan = req.plan
 
-    // ✅ Validate required data
+    // Validate required data
     if (!file) {
       return res.status(400).json({ success: false, message: "Image file is required" })
     }
@@ -36,7 +36,7 @@ export const removeImageObject = async (req, res) => {
       return res.status(403).json({ success: false, message: "This feature is only available for premium users" })
     }
 
-    // ✅ Upload image to Cloudinary
+    // Upload image to Cloudinary
     let uploadedImage
     try {
       uploadedImage = await cloudinary.uploader.upload(file.path, {
@@ -49,7 +49,7 @@ export const removeImageObject = async (req, res) => {
 
     const public_id = uploadedImage.public_id
 
-    // ✅ Generate transformation URL
+    //  Generate transformation URL
     const transformedImageUrl = cloudinary.url(public_id, {
       transformation: [{
         effect: `gen_remove:${object}`
@@ -57,13 +57,13 @@ export const removeImageObject = async (req, res) => {
       resource_type: "image",
     })
 
-    // ✅ Save to DB
+    // Save to DB
     await sql`
       INSERT INTO creations (user_id, prompt, content, type) 
       VALUES (${userId}, ${`Removed ${object} from image`}, ${transformedImageUrl}, 'image')
     `
 
-    // ✅ Respond with image
+    //  Respond with image
     res.json({ success: true, content: transformedImageUrl })
 
   } catch (error) {
@@ -253,9 +253,6 @@ export const generateImage = async (req, res) => {
     res.status(500).json({ success: false, message: error.message })
   }
 }
-
-
-
 
 
 

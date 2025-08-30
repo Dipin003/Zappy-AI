@@ -17,10 +17,7 @@ app.use(express.json())
 app.use(clerkMiddleware())
 
 
-app.get('/', (req, res) => {
-    res.send('Hello from server')
-})
-
+ 
 app.use(requireAuth())
 
 app.use('/api/ai' , aiRouter)
