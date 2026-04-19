@@ -5,7 +5,7 @@ import { clerkMiddleware, requireAuth } from '@clerk/express'
 import aiRouter from './routes/aiRoutes.js'
 import connectCloudinary from './configs/cloudinary.js'
 import userRouter from './routes/userRoutes.js'
-
+import path from 'path'
 
 const app = express()
 
@@ -16,12 +16,19 @@ app.use(cors())
 app.use(express.json())
 app.use(clerkMiddleware())
 
+const __dirname = path.resolve()
 
-
-app.use(requireAuth())
+app.use('/api', requireAuth())
 
 app.use('/api/ai', aiRouter)
 app.use('/api/user', userRouter)
+
+app.use(express.static(path.join(__dirname, '/client/dist')))
+
+
+app.use((_, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
+})
 
 const PORT = process.env.PORT || 3000
 

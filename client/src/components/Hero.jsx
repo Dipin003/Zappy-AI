@@ -90,23 +90,6 @@ const Hero = () => {
                     Start Creating Now
                 </motion.button>
 
-
-                {/* Secondary CTA */}
-                <motion.button
-                    whileHover={{
-                        scale: 1.05,
-                        transition: { type: "spring", stiffness: 300 }
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ type: "spring", stiffness: 200 }}
-                    className="bg-[#1e293b] px-8 py-3 rounded-full border border-gray-600 text-gray-100 font-semibold shadow-md"
-                >
-                    Watch Demo
-                </motion.button>
-
-
             </motion.div>
             <motion.div
 

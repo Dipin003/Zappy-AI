@@ -90,7 +90,6 @@ const BlogTitles = () => {
           }
           Generate Title
         </button>
-
       </form>
 
       {/* right col */}
