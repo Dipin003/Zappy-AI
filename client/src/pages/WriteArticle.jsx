@@ -6,8 +6,6 @@ import { useAuth } from '@clerk/clerk-react'
 import toast from 'react-hot-toast'
 import Markdown from 'react-markdown'
 
-// connecting to backend
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 
 
 const WriteArticle = () => {

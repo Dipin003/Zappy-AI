@@ -26,8 +26,8 @@ app.use('/api/user', userRouter)
 app.use(express.static(path.join(__dirname, '/client/dist')))
 
 
-app.use((_, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'client/dist/index.html'))
 })
 
 const PORT = process.env.PORT || 3000
