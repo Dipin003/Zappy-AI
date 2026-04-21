@@ -40,7 +40,7 @@ const WriteArticle = () => {
       setLoading(true)
       const prompt = `Write an article about ${input} in ${selectedLength.length} words.`
 
-      const { data } = await axios.post('api/ai/generate-article', {
+      const { data } = await axios.post('/api/ai/generate-article', {
         prompt, length: selectedLength.length
       }, {
         headers: {
